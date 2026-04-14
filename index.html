@@ -29,30 +29,57 @@
   padding-top: var(--sat);
 }
 
-/* Nav sits above home indicator */
+/* Nav fills to the physical bottom edge on all iPhones */
 #nav {
-  padding-bottom: var(--sab);
-  height: calc(56px + var(--sab));
+  height: calc(56px + max(var(--sab), 16px));
+  padding-bottom: max(var(--sab), 16px);
+  background-color: #ffffff;
+  /* White fill extends visually to bottom */
+  position: relative;
+}
+
+/* Fill the gap between nav and screen edge with white */
+#nav::after {
+  content: '';
+  position: absolute;
+  bottom: calc(-1 * max(var(--sab), 16px));
+  left: 0;
+  right: 0;
+  height: max(var(--sab), 16px);
+  background-color: #ffffff;
+}
+
+/* Ensure app shell background matches so no gap shows */
+#app {
+  background-color: #f7f4ef;
+}
+
+/* Nav items stay vertically centred in the 56px zone */
+.ni {
+  padding-bottom: 6px;
+  padding-top: 8px;
+  align-self: flex-start;
+  height: 56px;
 }
 
 /* All scroll areas clear the nav properly */
 .scroll-area {
-  padding-bottom: calc(56px + var(--sab) + 20px) !important;
+  padding-bottom: calc(56px + max(var(--sab), 16px) + 20px) !important;
 }
 
 /* Modals clear home indicator */
 .ms {
-  padding-bottom: calc(40px + var(--sab)) !important;
+  padding-bottom: calc(40px + max(var(--sab), 16px)) !important;
 }
 
 /* FABs sit above home indicator */
 .fab-add {
-  bottom: calc(60px + var(--sab) + 16px);
+  bottom: calc(60px + max(var(--sab), 16px) + 16px);
 }
 
 /* Toast clears nav */
 #toast {
-  bottom: calc(60px + var(--sab) + 16px);
+  bottom: calc(60px + max(var(--sab), 16px) + 16px);
 }
 
 /* Update banner clears status bar */
